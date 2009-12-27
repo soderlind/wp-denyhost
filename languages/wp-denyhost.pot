@@ -1,0 +1,76 @@
+# Translation of the WordPress plugin   by .
+# Copyright (C) 2009 
+# This file is distributed under the same license as the  package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2009.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version:  \n"
+"Report-Msgid-Bugs-To: http://wordpress.org/tag/wp-denyhost\n"
+"POT-Creation-Date: 2009-12-27 14:07+0000\n"
+"PO-Revision-Date: 2009-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: ps_wp_denyhost.php:108 ps_wp_denyhost.php:109
+msgid "Please enter a number."
+msgstr ""
+
+#: ps_wp_denyhost.php:110
+msgid "Please enter a value greater than or equal to 1."
+msgstr ""
+
+#: ps_wp_denyhost.php:164
+msgid "Settings"
+msgstr ""
+
+#: ps_wp_denyhost.php:187
+msgid ""
+"Basted on a users IP address, WP-DenyHost will block a spammer if he already "
+"has been tagged as a spammer. Use it together with the Akismet plugin. "
+"Akismet tags the spammer, and WP-DenyHost prevents him from adding more "
+"comment spam."
+msgstr ""
+
+#: ps_wp_denyhost.php:193
+msgid "Threshold:"
+msgstr ""
+
+#: ps_wp_denyhost.php:196
+msgid ""
+"Number of comment spams accepted before blocking a user. This is to prevent "
+"an innocent commenter, with comments wrongly tagged as spam, from being "
+"blocked."
+msgstr ""
+
+#: ps_wp_denyhost.php:200
+msgid "Response:"
+msgstr ""
+
+#: ps_wp_denyhost.php:203
+msgid "PHP exit"
+msgstr ""
+
+#: ps_wp_denyhost.php:204
+msgid "404 Not found"
+msgstr ""
+
+#: ps_wp_denyhost.php:205
+msgid "Redirect to Google"
+msgstr ""
+
+#: ps_wp_denyhost.php:207
+msgid "What kind of response a blocked spammer will get"
+msgstr ""
+
+#: ps_wp_denyhost.php:212
+msgid "Save Changes"
+msgstr ""
+
+#: ps_wp_denyhost.php:212
+msgid "Edit Comment Spam"
+msgstr ""
