@@ -10,7 +10,7 @@ WP-DenyHost denies a spammer from accessing your WordPress blog
 
 == Description ==
 
-Basted on a users IP address, WP-DenyHost will block a spammer if he already has been tagged as a spammer. Use it together with the Akismet plugin. Akismet tags the spammer, and WP-DenyHost prevents him from accessing you site.
+Based on a users IP address, WP-DenyHost will block a spammer if he already has been tagged as a spammer. Use it together with the Akismet plugin. Akismet tags the spammer, and WP-DenyHost prevents him from accessing you site.
 
 == Installation ==
 
