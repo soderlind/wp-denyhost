@@ -2,14 +2,15 @@
 /*
 Plugin Name: WP-DenyHost
 Plugin URI: http://soderlind.no/denyhost
-Description: Basted on a users IP address, WP-DenyHost will block a spammer if he already has been tagged as a spammer. Use it together with the Akismet plugin. Akismet tags the spammer, and WP-DenyHost prevents him from adding more comment spam.
-Version: 1.1.1
+Description: Based on a users IP address, WP-DenyHost will block a spammer if he already has been tagged as a spammer. Use it together with the Akismet plugin. Akismet tags the spammer, and WP-DenyHost prevents him from adding more comment spam.
+Version: 1.1.2
 Author: PerS
 Author URI: http://soderlind.no
 */
 /*
 
 Changelog:
+v1.1.2: Added response 403 Forbidden
 v1.1.1: Added languages/wp-denyhost.pot
 v1.1.0: Major rewrite. Added option page
 v1.0.1: Replaced LIKE (‘%$suspect%’) with = ‘$suspect’ i.e. look for exact match
@@ -92,6 +93,9 @@ if (!class_exists('ps_wp_denyhost')) {
 			switch ($this->options['ps_wp_denyhost_response']) {
 				case '404':
 					header("HTTP/1.0 404 Not Found");
+					break;
+				case '403':	
+					header('HTTP/1.1 403 Forbidden');
 					break;
 				case 'google':
 					header('Location: http://www.google.com/');
@@ -185,7 +189,7 @@ if (!class_exists('ps_wp_denyhost')) {
                 <div class="wrap">
                 <h2>WP-DenyHost</h2>
 				<p>
-				<?php _e('Basted on a users IP address, WP-DenyHost will block a spammer if he already has been tagged as a spammer. Use it together with the Akismet plugin. Akismet tags the spammer, and WP-DenyHost prevents him from adding more comment spam.', $this->localizationDomain); ?>
+				<?php _e('Based on a users IP address, WP-DenyHost will block a spammer if he already has been tagged as a spammer. Use it together with the Akismet plugin. Akismet tags the spammer, and WP-DenyHost prevents him from adding more comment spam.', $this->localizationDomain); ?>
 				</p>
                 <form method="post" id="ps_wp_denyhost_options">
                 <?php wp_nonce_field('ps_wp_denyhost-update-options'); ?>
@@ -201,8 +205,9 @@ if (!class_exists('ps_wp_denyhost')) {
                             <th><label for="ps_wp_denyhost_response"><?php _e('Response:', $this->localizationDomain); ?></label></th>
 							<td>
 								<select id="ps_wp_denyhost_response" name="ps_wp_denyhost_response">
-								  <option value="exit" <?=($this->options['ps_wp_denyhost_response']=="exit")?'selected="selected"':''?>><?php _e('PHP exit', $this->localizationDomain); ?></option>
-								  <option value="404" <?=($this->options['ps_wp_denyhost_response']=="404")?'selected="selected"':''?>><?php _e('404 Not found', $this->localizationDomain); ?></option>
+									<option value="exit" <?=($this->options['ps_wp_denyhost_response']=="exit")?'selected="selected"':''?>><?php _e('PHP exit', $this->localizationDomain); ?></option>
+							  		<option value="404" <?=($this->options['ps_wp_denyhost_response']=="404")?'selected="selected"':''?>><?php _e('404 Not found', $this->localizationDomain); ?></option>
+							  		<option value="403" <?=($this->options['ps_wp_denyhost_response']=="403")?'selected="selected"':''?>><?php _e('403 Forbidden', $this->localizationDomain); ?></option>
 								  <option value="google" <?=($this->options['ps_wp_denyhost_response']=="google")?'selected="selected"':''?>><?php _e('Redirect to Google', $this->localizationDomain); ?></option>
 								</select>
 								<br /><span class="setting-description"><?php _e('What kind of response a blocked spammer will get', $this->localizationDomain); ?>
