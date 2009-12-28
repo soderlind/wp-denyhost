@@ -33,6 +33,9 @@ In Setting->WP-DenyHost, set the threshold and response. WP-DenyHost is inactive
 
 == Changelog ==
 
+= 1.1.2 = 
+* Added response 403 Forbidden
+
 = 1.1.1 = 
 * Added languages/wp-denyhost.pot
 
