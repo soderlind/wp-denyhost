@@ -25,13 +25,16 @@ Based on a users IP address, WP-DenyHost will block a spammer if he already has 
 * Click on install to install WP-DenyHost
 
 = Configuration =
-In Setting->WP-DenyHost, set the threshold and response. WP-DenyHost is inactive until you've set these options.
+In Settings -> WP-DenyHost, set the threshold and response. Default threshold is 3, default response is 403 Forbidden.
 
 == Screenshots ==
 
 1. Option Page
 
 == Changelog ==
+
+= 1.1.3 =
+* Fixed minor bug
 
 = 1.1.2 = 
 * Added response 403 Forbidden
