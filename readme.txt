@@ -3,7 +3,7 @@ Contributors: PerS
 Donate link: http://soderlind.no/donate/
 Tags: deny host,spam,akismet
 Requires at least: 2.8.0
-Tested up to: 2.9
+Tested up to: 3.0-RC1
 Stable tag: trunk
 
 WP-DenyHost denies a spammer from accessing your WordPress blog
