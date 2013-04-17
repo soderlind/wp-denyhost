@@ -29,7 +29,7 @@ If you have a [CloudFlare](https://www.cloudflare.com) account, the plugin can a
 = Configuration =
 In Settings -> WP-DenyHost, set the threshold and response. Default threshold is 3, default response is 403 Forbidden.
 
-If you have [CloudFlare](https://www.cloudflare.com) account, you can enable CloudFlare and spammers will be added to [CloudFlare Block list](https://www.cloudflare.com/threat-control)
+If you have a [CloudFlare](https://www.cloudflare.com) account, you can enable CloudFlare and spammers will be added to the [CloudFlare Block list](https://www.cloudflare.com/threat-control)
 
 == Screenshots ==
 
