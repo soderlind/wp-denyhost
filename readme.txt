@@ -34,6 +34,7 @@ If you have [CloudFlare](https://www.cloudflare.com) account, you can enable Clo
 == Screenshots ==
 
 1. Option Page
+2. CloudFlare Block list
 
 == Changelog ==
 
