@@ -2,7 +2,7 @@
 Contributors: PerS
 Donate link: http://soderlind.no/donate/
 Tags: deny host,spam,akismet,cloudflare
-Requires at least: 2.8.0
+Requires at least: 3.2.0
 Tested up to: 3.5.1
 Stable tag: trunk
 
@@ -37,6 +37,8 @@ If you have a [CloudFlare](https://www.cloudflare.com) account, you can enable C
 2. CloudFlare Block list
 
 == Changelog ==
+= 1.2.3 =
+* removed PHP 4 "constructor"
 = 1.2.2 =
 * bug fix
 = 1.2.1 =

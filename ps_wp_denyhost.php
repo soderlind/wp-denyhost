@@ -3,13 +3,14 @@
 Plugin Name: WP-DenyHost
 Plugin URI: http://soderlind.no/denyhost
 Description: Based on a users IP address, WP-DenyHost will block a spammer if he already has been tagged as a spammer. Use it together with the Akismet plugin. Akismet tags the spammer, and WP-DenyHost prevents him from adding more comment spam.
-Version: 1.2.2
+Version: 1.2.3
 Author: PerS
 Author URI: http://soderlind.no
 */
 /*
 
 Changelog:
+v1.2.3: removed PHP 4 "constructor"
 v1.2.2: bug fix
 v1.2.1: added ps_wp_denyhost_admin_init, triggered by admin_init hook
 v1.2.0: Added support for CloudFlare Block list + removed wp deprecated code
@@ -60,15 +61,7 @@ if ( !class_exists( 'ps_wp_denyhost' ) ) {
          */
         var $options = array();
 
-        //Class Functions
-        /**
-         * PHP 4 Compatible Constructor
-         */
-        function ps_wp_denyhost() {$this->__construct();}
 
-        /**
-         * PHP 5 Constructor
-         */
         function __construct() {
 
             //Actions
@@ -245,7 +238,6 @@ if ( !class_exists( 'ps_wp_denyhost' ) ) {
 
             return $links;
         }
-
 
 
         /**T
