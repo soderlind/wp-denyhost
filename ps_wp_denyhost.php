@@ -3,13 +3,14 @@
 Plugin Name: WP-DenyHost
 Plugin URI: http://soderlind.no/denyhost
 Description: Based on a users IP address, WP-DenyHost will block a spammer if he already has been tagged as a spammer. Use it together with the Akismet plugin. Akismet tags the spammer, and WP-DenyHost prevents him from adding more comment spam.
-Version: 1.2.0
+Version: 1.2.1
 Author: PerS
 Author URI: http://soderlind.no
 */
 /*
 
 Changelog:
+v1.2.1: Minor  fix
 v1.2.0: Added support for CloudFlare Block list + removed wp deprecated code
 v1.1.3: Fixed minor bug
 v1.1.2: Added response 403 Forbidden
@@ -68,19 +69,13 @@ if ( !class_exists( 'ps_wp_denyhost' ) ) {
          * PHP 5 Constructor
          */
         function __construct() {
-            //Language Setup
-            $locale = get_locale();
-            $mo = plugins_url( "/languages/" . $this->localizationDomain . "-".$locale.".mo", __FILE__ );
-            load_textdomain( $this->localizationDomain, $mo );
 
-            //"Constants" setup
-            $this->url = plugins_url( basename( __FILE__ ), __FILE__ );
-            $this->urlpath = plugins_url( '', __FILE__ );
 
             //Initialize the options
             $this->getOptions();
 
             //Actions
+            add_action( 'admin_init', array( &$this, "ps_wp_denyhost_admin_init" ) );
             add_action( "admin_menu", array( &$this, "admin_menu_link" ) );
             add_action( 'wp_print_scripts', array( &$this, 'ps_wp_denyhost_script' ) );
 
@@ -88,6 +83,18 @@ if ( !class_exists( 'ps_wp_denyhost' ) ) {
                 add_action( "init", array( &$this, "ps_wp_denyhost_init" ) );
             }
 
+        }
+
+
+        function ps_wp_denyhost_admin_init() {
+            //Language Setup
+            $locale = get_locale();
+            $mo = plugins_url( "/languages/" . $this->localizationDomain . "-".$locale.".mo", __FILE__ );
+            load_textdomain( $this->localizationDomain, $mo );
+
+            //"Constants" setup
+            $this->url = plugins_url( basename( __FILE__ ), __FILE__ );
+            $this->urlpath = plugins_url( '', __FILE__ );            
         }
 
         function ps_wp_denyhost_init() {
