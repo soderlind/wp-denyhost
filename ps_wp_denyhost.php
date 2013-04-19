@@ -3,14 +3,15 @@
 Plugin Name: WP-DenyHost
 Plugin URI: http://soderlind.no/denyhost
 Description: Based on a users IP address, WP-DenyHost will block a spammer if he already has been tagged as a spammer. Use it together with the Akismet plugin. Akismet tags the spammer, and WP-DenyHost prevents him from adding more comment spam.
-Version: 1.2.1
+Version: 1.2.2
 Author: PerS
 Author URI: http://soderlind.no
 */
 /*
 
 Changelog:
-v1.2.1: Minor  fix
+v1.2.2: bug fix
+v1.2.1: added ps_wp_denyhost_admin_init, triggered by admin_init hook
 v1.2.0: Added support for CloudFlare Block list + removed wp deprecated code
 v1.1.3: Fixed minor bug
 v1.1.2: Added response 403 Forbidden
@@ -70,23 +71,17 @@ if ( !class_exists( 'ps_wp_denyhost' ) ) {
          */
         function __construct() {
 
-
-            //Initialize the options
-            $this->getOptions();
-
             //Actions
             add_action( 'admin_init', array( &$this, "ps_wp_denyhost_admin_init" ) );
             add_action( "admin_menu", array( &$this, "admin_menu_link" ) );
             add_action( 'wp_print_scripts', array( &$this, 'ps_wp_denyhost_script' ) );
-
-            if ( $this->options['ps_wp_denyhost_threshold'] && $this->options['ps_wp_denyhost_threshold'] > 0 ) {
-                add_action( "init", array( &$this, "ps_wp_denyhost_init" ) );
-            }
-
+            add_action( "init", array( &$this, "ps_wp_denyhost_init" ) );
         }
 
 
         function ps_wp_denyhost_admin_init() {
+            $this->getOptions();
+
             //Language Setup
             $locale = get_locale();
             $mo = plugins_url( "/languages/" . $this->localizationDomain . "-".$locale.".mo", __FILE__ );
@@ -99,27 +94,30 @@ if ( !class_exists( 'ps_wp_denyhost' ) ) {
 
         function ps_wp_denyhost_init() {
             global $wpdb;
+            $this->getOptions();
+            if ( $this->options['ps_wp_denyhost_threshold'] && $this->options['ps_wp_denyhost_threshold'] > 0 ) {
 
-            $suspect = $this->get_IP();
-            $count = (int) $wpdb->get_var( "SELECT COUNT(comment_ID) FROM $wpdb->comments  WHERE comment_approved = 'spam' AND comment_author_IP = '$suspect'" );
+                $suspect = $this->get_IP();
+                $count = (int) $wpdb->get_var( "SELECT COUNT(comment_ID) FROM $wpdb->comments  WHERE comment_approved = 'spam' AND comment_author_IP = '$suspect'" );
 
-            if ( $count >= $this->options['ps_wp_denyhost_threshold'] ) {
-                // add to cloudflare?
-                if ( $this->options['ps_wp_denyhost_enable_cloudflare'] ) {
-                    $this->add_to_cloudflare_blacklist( $suspect );
+                if ( $count >= $this->options['ps_wp_denyhost_threshold'] ) {
+                    // add to cloudflare?
+                    if ( $this->options['ps_wp_denyhost_enable_cloudflare'] ) {
+                        $this->add_to_cloudflare_blacklist( $suspect );
+                    }
+                    switch ( $this->options['ps_wp_denyhost_response'] ) {
+                    case '404':
+                        header( "HTTP/1.0 404 Not Found" );
+                        break;
+                    case '403':
+                        header( 'HTTP/1.1 403 Forbidden' );
+                        break;
+                    case 'google':
+                        header( 'Location: http://www.google.com/' );
+                        break;
+                    }
+                    exit;
                 }
-                switch ( $this->options['ps_wp_denyhost_response'] ) {
-                case '404':
-                    header( "HTTP/1.0 404 Not Found" );
-                    break;
-                case '403':
-                    header( 'HTTP/1.1 403 Forbidden' );
-                    break;
-                case 'google':
-                    header( 'Location: http://www.google.com/' );
-                    break;
-                }
-                exit;
             }
         }
 

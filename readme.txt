@@ -37,6 +37,8 @@ If you have a [CloudFlare](https://www.cloudflare.com) account, you can enable C
 2. CloudFlare Block list
 
 == Changelog ==
+= 1.2.2 =
+* bug fix
 = 1.2.1 =
 * added ps_wp_denyhost_admin_init, triggered by admin_init hook
 = 1.2.0 =
