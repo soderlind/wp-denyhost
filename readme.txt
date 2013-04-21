@@ -37,6 +37,8 @@ If you have a [CloudFlare](https://www.cloudflare.com) account, you can enable C
 2. CloudFlare Block list
 
 == Changelog ==
+= 1.2.4 =
+* replaced wp_print_scripts hook with admin_enqueue_scripts hook
 = 1.2.3 =
 * removed PHP 4 "constructor"
 = 1.2.2 =
