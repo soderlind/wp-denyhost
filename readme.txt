@@ -6,7 +6,7 @@ Requires at least: 3.2.0
 Tested up to: 3.5.1
 Stable tag: trunk
 
-WP-DenyHost denies a spammer from accessing your WordPress blog
+WP-DenyHost denies a spammer from accessing your WordPress site. If you have a CloudFlare account, WP-DenyHost can add spammers to the CloudFlare Block list
 
 == Description ==
 

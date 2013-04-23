@@ -3,13 +3,14 @@
 Plugin Name: WP-DenyHost
 Plugin URI: http://soderlind.no/denyhost
 Description: Based on a users IP address, WP-DenyHost will block a spammer if he already has been tagged as a spammer. Use it together with the Akismet plugin. Akismet tags the spammer, and WP-DenyHost prevents him from adding more comment spam.
-Version: 1.2.4
+Version: 1.2.5
 Author: PerS
 Author URI: http://soderlind.no
 */
 /*
 
 Changelog:
+v1.2.5: added $wpdb->prepare() to $wpdb->getvar()
 v1.2.4: replaced wp_print_scripts hook with admin_enqueue_scripts hook
 v1.2.3: removed PHP 4 "constructor"
 v1.2.2: bug fix
@@ -66,10 +67,10 @@ if ( !class_exists( 'ps_wp_denyhost' ) ) {
         function __construct() {
 
             //Actions
-            add_action( 'admin_init', array( &$this, "ps_wp_denyhost_admin_init" ) );
-            add_action( "admin_menu", array( &$this, "admin_menu_link" ) );
-            add_action( 'admin_enqueue_scripts', array( &$this, 'ps_wp_denyhost_script' ) );
-            add_action( "init", array( &$this, "ps_wp_denyhost_init" ) );
+            add_action( 'admin_init', array( $this, "ps_wp_denyhost_admin_init" ) );
+            add_action( "admin_menu", array( $this, "admin_menu_link" ) );
+            add_action( 'admin_enqueue_scripts', array( $this, 'ps_wp_denyhost_script' ) );
+            add_action( "init", array( $this, "ps_wp_denyhost_init" ) );
         }
 
 
@@ -92,7 +93,7 @@ if ( !class_exists( 'ps_wp_denyhost' ) ) {
             if ( $this->options['ps_wp_denyhost_threshold'] && $this->options['ps_wp_denyhost_threshold'] > 0 ) {
 
                 $suspect = $this->get_IP();
-                $count = (int) $wpdb->get_var( "SELECT COUNT(comment_ID) FROM $wpdb->comments  WHERE comment_approved = 'spam' AND comment_author_IP = '$suspect'" );
+                $count = (int) $wpdb->get_var( $wpdb->prepare("SELECT COUNT(comment_ID) FROM $wpdb->comments  WHERE comment_approved = 'spam' AND comment_author_IP = '%s'",$suspect) );
 
                 if ( $count >= $this->options['ps_wp_denyhost_threshold'] ) {
                     // add to cloudflare?
