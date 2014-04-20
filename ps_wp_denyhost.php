@@ -169,7 +169,7 @@ if ( !class_exists( 'ps_wp_denyhost' ) ) {
 
         function ps_wp_denyhost_script() {
             wp_enqueue_script( 'jquery' );
-            wp_enqueue_script( 'jquery-validate', 'http://ajax.microsoft.com/ajax/jquery.validate/1.6/jquery.validate.min.js', array( 'jquery' ) );
+            wp_enqueue_script( 'jquery-validate', '//ajax.microsoft.com/ajax/jquery.validate/1.6/jquery.validate.min.js', array( 'jquery' ) );
             wp_enqueue_script( 'ps-wp-denyhost-script', $this->url.'?ps_wp_denyhost_javascript', array( 'jquery-validate' ) ); // see end of this file
             wp_localize_script( 'ps-wp-denyhost-script', 'ps_wp_denyhost_lang', array(
                     'required' => __( 'Please enter a number.', $this->localizationDomain ),
