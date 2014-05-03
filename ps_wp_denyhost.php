@@ -3,13 +3,16 @@
 Plugin Name: WP-DenyHost
 Plugin URI: http://soderlind.no/denyhost
 Description: Based on a users IP address, WP-DenyHost will block a spammer if he already has been tagged as a spammer. Use it together with the Akismet plugin. Akismet tags the spammer, and WP-DenyHost prevents him from adding more comment spam.
-Version: 1.2.5
+Version: 1.2.6
 Author: PerS
 Author URI: http://soderlind.no
+Text Domain: wp-denyhost
+Domain Path: /languages
 */
 /*
 
 Changelog:
+v1.2.6  added new languages/wp-denyhost.po file (note, renamed the language file). removed javascript from plugin (loads faster)
 v1.2.5: added $wpdb->prepare() to $wpdb->getvar()
 v1.2.4: replaced wp_print_scripts hook with admin_enqueue_scripts hook
 v1.2.3: removed PHP 4 "constructor"
@@ -41,7 +44,7 @@ if ( !class_exists( 'ps_wp_denyhost' ) ) {
          *
          * @var string $localizationDomain Domain used for localization
          */
-        var $localizationDomain = "ps_wp_denyhost";
+        var $localizationDomain = "wp-denyhost";
 
         /**
          *
@@ -69,7 +72,6 @@ if ( !class_exists( 'ps_wp_denyhost' ) ) {
             //Actions
             add_action( 'admin_init', array( $this, "ps_wp_denyhost_admin_init" ) );
             add_action( "admin_menu", array( $this, "admin_menu_link" ) );
-            add_action( 'admin_enqueue_scripts', array( $this, 'ps_wp_denyhost_script' ) );
             add_action( "init", array( $this, "ps_wp_denyhost_init" ) );
         }
 
@@ -77,14 +79,10 @@ if ( !class_exists( 'ps_wp_denyhost' ) ) {
         function ps_wp_denyhost_admin_init() {
             $this->getOptions();
 
-            //Language Setup
-            $locale = get_locale();
-            $mo = plugins_url( "/languages/" . $this->localizationDomain . "-".$locale.".mo", __FILE__ );
-            load_textdomain( $this->localizationDomain, $mo );
-
+            load_plugin_textdomain( 'wp-denyhost', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
             //"Constants" setup
             $this->url = plugins_url( basename( __FILE__ ), __FILE__ );
-            $this->urlpath = plugins_url( '', __FILE__ );            
+            $this->urlpath = plugins_url( '', __FILE__ );
         }
 
         function ps_wp_denyhost_init() {
@@ -157,18 +155,6 @@ if ( !class_exists( 'ps_wp_denyhost' ) ) {
                     return true;
                  }
             }
-        }
-
-
-        function ps_wp_denyhost_script() {
-            wp_enqueue_script( 'jquery' );
-            wp_enqueue_script( 'jquery-validate', 'http://ajax.microsoft.com/ajax/jquery.validate/1.6/jquery.validate.min.js', array( 'jquery' ) );
-            wp_enqueue_script( 'ps-wp-denyhost-script', $this->url.'?ps_wp_denyhost_javascript', array( 'jquery-validate' ) ); // see end of this file
-            wp_localize_script( 'ps-wp-denyhost-script', 'ps_wp_denyhost_lang', array(
-                    'required' => __( 'Please enter a number.', $this->localizationDomain ),
-                    'number'   => __( 'Please enter a number.', $this->localizationDomain ),
-                    'min'      => __( 'Please enter a value greater than or equal to 1.', $this->localizationDomain ),
-                ) );
         }
 
 
@@ -327,41 +313,6 @@ if ( !class_exists( 'ps_wp_denyhost' ) ) {
     } //End Class
 } //End if class exists statement
 
-
-if ( isset( $_GET['ps_wp_denyhost_javascript'] ) ) {
-
-    header( "content-type: application/x-javascript" );
-    echo<<<ENDJS
-/**
-* @desc WP-DenyHost
-* @author Per Soderlind - soderlind.no
-*/
-
-jQuery(document).ready(function(){
-    jQuery("#ps_wp_denyhost_options").validate({
-        rules: {
-            ps_wp_denyhost_threshold: {
-                required: true,
-                number: true,
-                min: 1
-            }
-        },
-        messages: {
-            ps_wp_denyhost_threshold: {
-                // the ps_wp_denyhost_lang object is define using wp_localize_script() in function ps_wp_denyhost_script()
-                required: ps_wp_denyhost_lang.required,
-                number: ps_wp_denyhost_lang.number,
-                min: ps_wp_denyhost_lang.min
-            }
-        }
-    });
-});
-
-ENDJS;
-
-} else {
-    if ( class_exists( 'ps_wp_denyhost' ) ) {
-        $ps_wp_denyhost_var = new ps_wp_denyhost();
-    }
+if ( class_exists( 'ps_wp_denyhost' ) ) {
+    $ps_wp_denyhost_var = new ps_wp_denyhost();
 }
-?>

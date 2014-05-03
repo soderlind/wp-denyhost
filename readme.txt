@@ -3,8 +3,8 @@ Contributors: PerS
 Donate link: http://soderlind.no/donate/
 Tags: deny host,spam,akismet,cloudflare
 Requires at least: 3.2.0
-Tested up to: 3.5.1
-Stable tag: trunk
+Tested up to: 3.9
+Stable tag: 1.2.6
 
 WP-DenyHost denies a spammer from accessing your WordPress site. WP-DenyHost can add spammers to the CloudFlare Block list
 
@@ -37,6 +37,8 @@ If you have a [CloudFlare](https://www.cloudflare.com) account, you can enable C
 2. CloudFlare Block list
 
 == Changelog ==
+= 1.2.6 =
+* added new languages/wp-denyhost.po file (note, renamed the language file). removed javascript from plugin (loads faster)
 = 1.2.5 =
 * added $wpdb->prepare() to $wpdb->getvar()
 = 1.2.4 =
