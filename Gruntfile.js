@@ -24,8 +24,8 @@ module.exports = function (grunt) {
 	git_files_list = svn_files_list.concat([
 		'package.json',
 		'Gruntfile.js',
-		'grunt/**',
 		'.travis.yml',
+		'grunt/**',
 		'assets/**'
 	]);
 
