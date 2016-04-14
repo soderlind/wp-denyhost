@@ -1,3 +1,5 @@
+
+<a href="https://travis-ci.org/soderlind/wp-denyhost"><img src="https://api.travis-ci.org/soderlind/wp-denyhost.svg?branch=master" /></a>
 # WP-DenyHost #
 **Contributors:** PerS  
 **Donate link:** http://soderlind.no/donate/  
@@ -6,7 +8,6 @@
 **Tested up to:** 4.5  
 **Stable tag:** 1.3.0  
 
-<img src="https://api.travis-ci.org/soderlind/wp-denyhost.svg?branch=master" />
 
 WP-DenyHost denies a spammer from accessing your WordPress site. WP-DenyHost can add spammers to the CloudFlare Block list
 
