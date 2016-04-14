@@ -2,11 +2,11 @@
 Contributors: PerS
 Donate link: http://soderlind.no/donate/
 Tags: deny host,spam,akismet,cloudflare
-Requires at least: 2.8.0
-Tested up to: 3.5.1
-Stable tag: trunk
+Requires at least: 4.4
+Tested up to: 4.5
+Stable tag: 1.3.0
 
-WP-DenyHost denies a spammer from accessing your WordPress blog
+WP-DenyHost denies a spammer from accessing your WordPress site. WP-DenyHost can add spammers to the CloudFlare Block list
 
 == Description ==
 
@@ -37,6 +37,23 @@ If you have a [CloudFlare](https://www.cloudflare.com) account, you can enable C
 2. CloudFlare Block list
 
 == Changelog ==
+= 1.3.0 =
+* Hard-code the text-domain for better compatibility with [GlotPress](https://translate.wordpress.org/projects/wp-plugins/wp-denyhost).
+* Update plugin for [WordPress Coding Standards](https://make.wordpress.org/core/handbook/best-practices/coding-standards/).
+* Tested & found compatible with WP 4.5.
+* General housekeeping. 
+= 1.2.7 =
+* Tested with WordPress 4.3
+= 1.2.6 =
+* added new languages/wp-denyhost.po file (note, renamed the language file). removed javascript from plugin (loads faster)
+= 1.2.5 =
+* added $wpdb->prepare() to $wpdb->getvar()
+= 1.2.4 =
+* replaced wp_print_scripts hook with admin_enqueue_scripts hook
+= 1.2.3 =
+* removed PHP 4 "constructor"
+= 1.2.2 =
+* bug fix
 = 1.2.1 =
 * added ps_wp_denyhost_admin_init, triggered by admin_init hook
 = 1.2.0 =
@@ -44,17 +61,17 @@ If you have a [CloudFlare](https://www.cloudflare.com) account, you can enable C
 = 1.1.3 =
 * Fixed minor bug
 
-= 1.1.2 = 
+= 1.1.2 =
 * Added response 403 Forbidden
 
-= 1.1.1 = 
+= 1.1.1 =
 * Added languages/wp-denyhost.pot
 
-= 1.1.0 = 
+= 1.1.0 =
 * Major rewrite. Added option page
 
-= 1.0.1 = 
+= 1.0.1 =
 * Replaced LIKE (‘%$suspect%’) with = ‘$suspect’ i.e. look for exact match
 
-= 1.0 = 
+= 1.0 =
 * initial release
