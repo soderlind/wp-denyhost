@@ -3,8 +3,8 @@ Contributors: PerS
 Donate link: http://soderlind.no/donate/
 Tags: deny host,spam,akismet,cloudflare
 Requires at least: 4.4
-Tested up to: 4.5
-Stable tag: 1.3.0
+Tested up to: 4.6
+Stable tag: 1.3.1
 
 WP-DenyHost denies a spammer from accessing your WordPress site. WP-DenyHost can add spammers to the CloudFlare Block list
 
@@ -37,11 +37,13 @@ If you have a [CloudFlare](https://www.cloudflare.com) account, you can enable C
 2. CloudFlare Block list
 
 == Changelog ==
+= 1.3.1 =
+* Tested & found compatible with WP 4.6.
 = 1.3.0 =
 * Hard-code the text-domain for better compatibility with [GlotPress](https://translate.wordpress.org/projects/wp-plugins/wp-denyhost).
 * Update plugin for [WordPress Coding Standards](https://make.wordpress.org/core/handbook/best-practices/coding-standards/).
 * Tested & found compatible with WP 4.5.
-* General housekeeping. 
+* General housekeeping.
 = 1.2.7 =
 * Tested with WordPress 4.3
 = 1.2.6 =

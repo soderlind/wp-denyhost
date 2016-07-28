@@ -32,26 +32,13 @@ module.exports = function (grunt) {
 	// Project configuration.
 	grunt.initConfig({
 		pkg : grunt.file.readJSON( 'package.json' ),
-		directories: {
-			reports: 'logs',
-        	php: '*'
-		},
-		files: {
-			js: [
-				'Gruntfile.js',
-				'tasks/{,*/}*.js',
-				'grunt/{,*/}*.js'
-			],
-			json: [
-				'{,*/}*.json',
-			],
-			php: ['wp-denyhost.php'],
-			exclude: [
-						'languages/.*',
-						'assets/.*',
-						'node_modules/.*'
-					],
-		},
+		wpplugin: grunt.file.readJSON( 'deploy/wpplugin.json' ),
+
+		// directories: {
+		// 	reports: 'logs',
+        // 	php: '*'
+		// },
+		files: grunt.file.readJSON('deploy/files.json'),
 		clean: {
 			post_build: [
 				'build'
@@ -160,7 +147,8 @@ module.exports = function (grunt) {
 		},
 		push_svn: {
 			options: {
-				remove: true
+				remove: true,
+				username: 'PerS'
 			},
 			main: {
 				src: 'build/<%= pkg.name %>',
@@ -194,14 +182,12 @@ module.exports = function (grunt) {
 		},
 	});
 
-
-
 	//load modules
 	// show elapsed time at the end
 	require('time-grunt')(grunt);
 
 // Load per-task config from separate files.
-	grunt.loadTasks('grunt');
+	grunt.loadTasks('deploy/tasks');
 
 	grunt.loadNpmTasks( 'grunt-contrib-clean' );
 	grunt.loadNpmTasks( 'grunt-contrib-copy' );
