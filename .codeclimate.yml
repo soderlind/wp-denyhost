@@ -22,3 +22,4 @@ ratings:
 exclude_paths:
   - node_modules/**/*
   - deploy/**
+  - grunt/**
