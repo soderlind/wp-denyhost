@@ -5,6 +5,11 @@
  *        copy:svn_assets task
  *        makepot, creates wp-anchor-header.pot
  */
+
+ //load modules
+ // show elapsed time at the end
+ require('time-grunt')(grunt);
+
 module.exports = function (grunt) {
 
 	/**
@@ -14,7 +19,7 @@ module.exports = function (grunt) {
 	svn_files_list = [
 		'readme.txt',
 		'wp-denyhost.php',
-		'languages/**',
+		'languages/**'
 	];
 
 	/**
@@ -71,7 +76,7 @@ module.exports = function (grunt) {
 				expand: true,
 				src:  svn_files_list,
 				dest: 'build/<%= pkg.name %>/tags/<%= pkg.version %>/'
-			},
+			}
 
 		},
 		gittag: {
@@ -176,15 +181,13 @@ module.exports = function (grunt) {
 		            	'languages/.*',
 		            	'js/.*',
 		            	'node_modules/.*'
-		            ],
+		            ]
 		        }
 		    }
-		},
+		}
 	});
 
-	//load modules
-	// show elapsed time at the end
-	require('time-grunt')(grunt);
+
 
 // Load per-task config from separate files.
 	grunt.loadTasks('deploy/tasks');
