@@ -21,4 +21,4 @@ ratings:
     - "**.php"
 exclude_paths:
   - node_modules/**/*
-  - _files/**
+  - deploy/**
