@@ -41,7 +41,7 @@
     "grunt-phpunit": "~0.3.1",
     "grunt-contrib-clean": "~1.0.0",
     "grunt-shell": "~1.2.1",
-    "lodash": "~4.11.0",
+    "lodash": ">=4.17.5",
     "grunt-phpmd": "~0.1.0",
     "grunt-mkdir": "~1.0.0"
   }
