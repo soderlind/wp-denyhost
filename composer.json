@@ -1,0 +1,8 @@
+{
+    "name": "soderlind/wp-denyhost",
+    "description": "WP-DenyHost",
+    "type": "wordpress-plugin",
+    "homepage": "https://github.com/soderlind/wp-denyhost",
+    "license": "GPL-2.0-or-later",
+    "require": {}
+}
